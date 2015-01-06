@@ -1,16 +1,16 @@
 # These rules pertain to injection attempts I observed when my ISP deployed a PerfTech Bulletin System on my connection.
-# Where possible I have made them generic in order to capture other system which use the same technique, however thi is
+# Where possible I have made them generic in order to capture other system which use the same technique, however this is
 # not intended to be comprehensive against all attack types.  If you would like to see other MiTM detection rules, let
 # me know and I will endeavour to include them.
 
 # Origins this are from my little research project: http://blog.squarelemon.com/blog/2014/10/29/corporation-in-the-middle/
 
 # Detecting clients being injected.
-alert tcp $EXTERNAL_NET any -> $HOME_NET any (msg:"Suspected TCP injection"; flow:to_client; window:1; fragbits:!D; reference:url,http://THING; sid:1000000; rev:1)
-alert tcp $EXTERNAL_NET $HTTP_PORTS -> $HOME_NET any (msg:"Data Served by known Injection Device (PerfTech)"; flow:to_client,established; content:"PerfTech"; http_header; reference:url,http://THING; sid:1000001; rev:1)
+alert tcp $EXTERNAL_NET any -> $HOME_NET any (msg:"Suspected TCP injection"; flow:to_client; window:1; fragbits:!D; reference:url,https://gist.github.com/LeeBrotherston/523ffbc02f2407fd213c#file-interception_snort_rule_0; sid:1000000; rev:1)
+alert tcp $EXTERNAL_NET $HTTP_PORTS -> $HOME_NET any (msg:"Data Served by known Injection Device (PerfTech)"; flow:to_client,established; content:"PerfTech"; http_header; reference:url,https://gist.github.com/LeeBrotherston/523ffbc02f2407fd213c#file-interception_snort_rule_1; sid:1000001; rev:1)
 
 # Temporarily disabling this one until I can work out if it's too noisy or if I'm really getting MiTM'd more than I realise!
-# alert tcp $EXTERNAL_NET $HTTP_PORTS -> $HOME_NET any (msg:"Suspicious http header combination"; flow:to_client,established; content:!"Server"; content:"Cache-Control"; content:"Expires"; content:"Pragma"; http_header; reference:url,http://THING; sid:1000002; rev:1)
+# alert tcp $EXTERNAL_NET $HTTP_PORTS -> $HOME_NET any (msg:"Suspicious http header combination"; flow:to_client,established; content:!"Server"; content:"Cache-Control"; content:"Expires"; content:"Pragma"; http_header; reference:url,https://gist.github.com/LeeBrotherston/523ffbc02f2407fd213c#file-interception_snort_rule_2; sid:1000002; rev:1)
 
 # Artifacts arriving at a server suggesting that the connected client just got injected, no the server itself.
-alert tcp any any -> $HTTP_SERVERS $HTTP_PORTS (msg:"Connection Reset to enable client Injection"; flow:to_server; flags:RPA; reference:url,http://THING; sid:1000003; rev:1)
+alert tcp any any -> $HTTP_SERVERS $HTTP_PORTS (msg:"Connection Reset to enable client Injection"; flow:to_server; flags:RPA; reference:url,https://gist.github.com/LeeBrotherston/523ffbc02f2407fd213c#file-interception_snort_rule_3; sid:1000003; rev:1)
