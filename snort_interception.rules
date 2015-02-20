@@ -7,3 +7,6 @@ alert tcp $EXTERNAL_NET $HTTP_PORTS -> $HOME_NET any (msg:"Data Served by known 
 
 # Artifacts arriving at a server suggesting that the connected client just got injected, no the server itself.
 alert tcp any any -> $HTTP_SERVERS $HTTP_PORTS (msg:"Connection Reset to enable client Injection"; flow:to_server; flags:RPA; reference:url,https://gist.github.com/LeeBrotherston/523ffbc02f2407fd213c#file-interception_snort_rule_3; sid:1000003; rev:1)
+
+# Matches the ciphersuite combination used by Superfish
+alert tcp any any -> any 443 (msg:"SuperFish Cipher Suite Profile Matched"; flow:to_server; reference:utl,https://gist.githubusercontent.com/LeeBrotherston/523ffbc02f2407fd213c/raw/1d37a4a5565fdd2131614e40f4090db3a2da7869/sid:1000004; content:"|c0 14 c0 0a c0 22 c0 21 00 39 00 38 00 88 00 87 c0 0f c0 05 00 35 00 84 c0 12 c0 08 c0 1c c0 1b 00 16 00 13 c0 0d c0 03 00 0a c0 13 c0 09 c0 1f c0 1e 00 33 00 32 00 9a 00 99 00 45 00 44 c0 0e c0 04 00 2f 00 96 00 41 00 07 c0 11 c0 07 c0 0c c0 02 00 05 00 04 00 15 00 12 00 09 00 14 00 11 00 08 00 06 00 03 00 ff|"; sid:1000004; rev:1)
