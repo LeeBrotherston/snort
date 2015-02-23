@@ -10,3 +10,6 @@ alert tcp any any -> $HTTP_SERVERS $HTTP_PORTS (msg:"Connection Reset to enable 
 
 # Matches the ciphersuite combination used by Superfish
 alert tcp any any -> any 443 (msg:"SuperFish Cipher Suite Profile Matched"; flow:to_server; reference:url,https://gist.githubusercontent.com/LeeBrotherston/523ffbc02f2407fd213c/raw/1d37a4a5565fdd2131614e40f4090db3a2da7869/sid:1000004; content:"|c0 14 c0 0a c0 22 c0 21 00 39 00 38 00 88 00 87 c0 0f c0 05 00 35 00 84 c0 12 c0 08 c0 1c c0 1b 00 16 00 13 c0 0d c0 03 00 0a c0 13 c0 09 c0 1f c0 1e 00 33 00 32 00 9a 00 99 00 45 00 44 c0 0e c0 04 00 2f 00 96 00 41 00 07 c0 11 c0 07 c0 0c c0 02 00 05 00 04 00 15 00 12 00 09 00 14 00 11 00 08 00 06 00 03 00 ff|"; sid:1000004; rev:2;)
+
+# Looks like we can also catch PrivDog with a ciphersuite fingerprint
+alert tcp any any -> any 443 (msg:"PrivDog Cipher Suite Profile Matched"; flow:to_server; reference:url,https://gist.github.com/LeeBrotherston/523ffbc02f2407fd213c#file-sid-1000005; content:"|c0 14 c0 0a c0 22 c0 21 00 39 00 38 c0 0f c0 05 00 35 c0 13 c0 09 c0 1f c0 1e 00 33 00 32 c0 0e c0 04 00 2f c0 11 c0 07 c0 0c c0 02 00 05 00 04 00 9a 00 99 00 96 00 15 00 12 00 09 00 14 00 11 00 08 c0 12 c0 08 c0 1c c0 1b 00 16 00 13 c0 0d c0 03 00 0a 00 07 00 ff|"; sid:1000005; rev:1;)
