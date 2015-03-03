@@ -9,6 +9,8 @@ Although these rules were derived from a specific attack type used by my ISP, I 
 
 Since then however this started to grow as I discover other interception techniques for which snort/suricata rules can be written.  This now includes rules for Superfish (http://blog.squarelemon.com/blog/2015/02/20/superfish-detection/) and Privdog (http://blog.squarelemon.com/blog/2015/02/23/privdog-detection/)
 
+Added 3rd March - GeniusBox Detection (another install your own cert MiTM company like SuperFish and PrivDog).  Relevent blog post with more details to follow.
+
 Feedback
 ========
 
