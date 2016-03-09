@@ -1,0 +1,11 @@
+language: c
+compiler:
+  - clang
+  - gcc
+
+addons:
+  apt:
+    packages:
+      - libpcap-dev
+
+sudo: false
