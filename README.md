@@ -15,3 +15,4 @@ Feedback
 ========
 
 These rules are written based on my personal observations an deployments.  Feedback from others who deploy these rules (both positive and negative) can help to improve them.  I can improve against false positives and can mark rules as "good" with validation from others.  Please feel free to give me feedback either via github or twitter (https://twitter.com/synackpse).
+# fptls_collector
